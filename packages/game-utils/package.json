@@ -1,0 +1,23 @@
+{
+  "name": "@repo/game-utils",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./types": {
+      "types": "./src/yahtzee.types.ts",
+      "default": "./dist/yahtzee.types.js"
+    },
+    "./utils": {
+      "types": "./src/utils.ts",
+      "default": "./dist/utils.js"
+    }
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "typescript": "latest",
+    "@repo/eslint-config": "*"
+  }
+}

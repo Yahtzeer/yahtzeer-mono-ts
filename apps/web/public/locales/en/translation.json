@@ -1,0 +1,28 @@
+{
+  "components": {
+    "scorecard": {
+      "fields": {
+        "classic": {
+          "Ones": "Ones",
+          "Twos": "Twos",
+          "Threes": "Threes",
+          "Fours": "Fours",
+          "Fives": "Fives",
+          "Sixes": "Sixes",
+          "Bonus": "Bonus",
+          "Sum": "Sum",
+          "OnePair": "One Pair",
+          "TwoPairs": "Two Pairs",
+          "ThreeOfAKind": "Three of a Kind",
+          "FourOfAKind": "Four of a Kind",
+          "SmallStraight": "Small Straight",
+          "LargeStraight": "Large Straight",
+          "FullHouse": "Full House",
+          "Chance": "Chance",
+          "Yahtzee": "Yahtzee",
+          "Total": "Total"
+        }
+      }
+    }
+  }
+}
