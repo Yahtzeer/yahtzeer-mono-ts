@@ -3,29 +3,32 @@ export type Player = {
   name: string;
 };
 
-export enum GameMode {
-  Classic = 'Classic',
-}
+export const GameMode = {
+  Classic: 'Classic',
+} as const;
 
-export enum ClassicScoreField {
-  Ones = 'Ones',
-  Twos = 'Twos',
-  Threes = 'Threes',
-  Fours = 'Fours',
-  Fives = 'Fives',
-  Sixes = 'Sixes',
-  OnePair = 'OnePair',
-  TwoPairs = 'TwoPairs',
-  ThreeOfAKind = 'ThreeOfAKind',
-  FourOfAKind = 'FourOfAKind',
-  SmallStraight = 'SmallStraight',
-  LargeStraight = 'LargeStraight',
-  FullHouse = 'FullHouse',
-  Chance = 'Chance',
-  Yahtzee = 'Yahtzee',
-}
+export const ClassicScoreField = {
+  Ones: 'Ones',
+  Twos: 'Twos',
+  Threes: 'Threes',
+  Fours: 'Fours',
+  Fives: 'Fives',
+  Sixes: 'Sixes',
+  OnePair: 'OnePair',
+  TwoPairs: 'TwoPairs',
+  ThreeOfAKind: 'ThreeOfAKind',
+  FourOfAKind: 'FourOfAKind',
+  SmallStraight: 'SmallStraight',
+  LargeStraight: 'LargeStraight',
+  FullHouse: 'FullHouse',
+  Chance: 'Chance',
+  Yahtzee: 'Yahtzee',
+} as const;
 
-export type ScoreField = ClassicScoreField;
+export type ClassicFields =
+  (typeof ClassicScoreField)[keyof typeof ClassicScoreField];
+
+export type ScoreField = ClassicFields;
 
 export type PlayerScore = Record<Player['id'], number | null>;
 

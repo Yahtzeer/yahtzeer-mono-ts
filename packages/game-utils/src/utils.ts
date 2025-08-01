@@ -3,8 +3,9 @@ import {
   type Player,
   type Scores,
   type RenderableRow,
-  ComputedRow,
-  ScoreField,
+  type ComputedRow,
+  type ScoreField,
+  type ClassicFields,
 } from '@repo/game-utils/types';
 
 export const createInitialPlayers = (amountOfPlayers = 5): Player[] => {
@@ -16,22 +17,24 @@ export const createInitialPlayers = (amountOfPlayers = 5): Player[] => {
 
 export const createInitialScores = (): Scores => {
   return Object.keys(ClassicScoreField).reduce((acc, field) => {
-    acc[field as ClassicScoreField] = {};
+    acc[field as ClassicFields] = {};
     return acc;
   }, {} as Scores);
 };
 
-const upperSectionFields = [
+const upperSectionFields = new Set<ScoreField>([
   ClassicScoreField.Ones,
   ClassicScoreField.Twos,
   ClassicScoreField.Threes,
   ClassicScoreField.Fours,
   ClassicScoreField.Fives,
   ClassicScoreField.Sixes,
-];
+]);
+
+const upperSectionFieldsArray = Array.from(upperSectionFields);
 
 const lowerSectionFields = Object.values(ClassicScoreField).filter(
-  (field) => !upperSectionFields.includes(field as ClassicScoreField)
+  (field) => !upperSectionFields.has(field)
 );
 
 const sum = (scores: Scores, playerId: number, fields: ScoreField[]) =>
@@ -45,20 +48,20 @@ export const isComputedRow = (row: RenderableRow): row is ComputedRow =>
 
 export const getRenderableRows = (): RenderableRow[] => {
   return [
-    ...upperSectionFields.map((field) => ({
+    ...upperSectionFieldsArray.map((field) => ({
       field,
     })),
     {
       field: 'Bonus',
       compute: (scores: Scores, playerId: number) => {
-        const upperSum = sum(scores, playerId, upperSectionFields);
+        const upperSum = sum(scores, playerId, upperSectionFieldsArray);
         return upperSum >= 63 ? 50 : 0;
       },
     },
     {
       field: 'Sum',
       compute: (scores: Scores, playerId: number) =>
-        sum(scores, playerId, upperSectionFields),
+        sum(scores, playerId, upperSectionFieldsArray),
     },
     ...lowerSectionFields.map((field) => ({
       field,
@@ -66,7 +69,7 @@ export const getRenderableRows = (): RenderableRow[] => {
     {
       field: 'Total',
       compute: (scores: Scores, playerId: number) => {
-        const upperSum = sum(scores, playerId, upperSectionFields);
+        const upperSum = sum(scores, playerId, upperSectionFieldsArray);
         const lowerSum = sum(scores, playerId, lowerSectionFields);
         const bonus = upperSum >= 63 ? 50 : 0;
         return upperSum + lowerSum + bonus;
