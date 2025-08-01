@@ -15,7 +15,7 @@ const Header = ({ players, editPlayer }: Props) => {
           <IconButton></IconButton>
         </Cell>
         {players.map((player) => (
-          <Cell key={player.id} align="center" sx={{ minWidth: '150px' }}>
+          <Cell key={player.id} align="center" sx={{ minWidth: 100 }}>
             <TextField
               value={player.name}
               variant="standard"

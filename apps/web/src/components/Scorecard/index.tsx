@@ -9,9 +9,9 @@ const Scorecard = () => {
   return (
     <TableContainer
       component={Paper}
-      sx={{ height: '100%', overflowX: 'auto' }}
+      sx={{ height: '100%', overflowX: 'auto', bgcolor: 'background.default' }}
     >
-      <Table sx={{ borderCollapse: 'collapse', height: '100%' }}>
+      <Table sx={{ height: '100%' }} stickyHeader>
         <Header players={players} editPlayer={editPlayer} />
         <Body players={players} scores={scores} editScore={editScore} />
       </Table>

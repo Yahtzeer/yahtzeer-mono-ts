@@ -30,6 +30,7 @@ const Body = ({ players, scores, editScore }: Props) => {
                 isComputedRow(row)
                   ? theme.typography.fontWeightBold
                   : undefined,
+              minWidth: 150,
             }}
           >
             {t(`components.scorecard.fields.classic.${row.field}`)}
