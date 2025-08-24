@@ -1,5 +1,6 @@
 import { isRejectedWithValue, nanoid, type Middleware } from '@reduxjs/toolkit';
 import { addNotification } from './slices/notifications';
+import i18n from '../utils/i18n';
 
 export const errorMiddleware: Middleware =
   ({ dispatch }) =>
@@ -13,7 +14,8 @@ export const errorMiddleware: Middleware =
       dispatch(
         addNotification({
           id: nanoid(),
-          message: typedPayload.data.message || 'An error occurred',
+          message:
+            typedPayload.data.message || i18n.t('common.errors.fallback'),
           type: 'error',
         })
       );

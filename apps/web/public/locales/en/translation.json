@@ -41,6 +41,9 @@
   },
   "common": {
     "loading": "Loading...",
-    "or": "OR"
+    "or": "OR",
+    "errors": {
+      "fallback": "An error occurred. Please try again later."
+    }
   }
 }
