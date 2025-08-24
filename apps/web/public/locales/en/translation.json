@@ -23,6 +23,24 @@
           "Total": "Total"
         }
       }
+    },
+    "auth": {
+      "common": {
+        "username": "Username",
+        "password": "Password",
+        "login": "Login",
+        "register": "Register"
+      },
+      "login": {
+        "noAccount": "Create an account"
+      },
+      "register": {
+        "haveAccount": "Log in to existing account"
+      }
     }
+  },
+  "common": {
+    "loading": "Loading...",
+    "or": "OR"
   }
 }
