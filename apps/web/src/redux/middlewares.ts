@@ -15,7 +15,7 @@ export const errorMiddleware: Middleware =
         addNotification({
           id: nanoid(),
           message:
-            typedPayload.data.message || i18n.t('common.errors.fallback'),
+            typedPayload?.data?.message || i18n.t('common.errors.fallback'),
           type: 'error',
         })
       );
