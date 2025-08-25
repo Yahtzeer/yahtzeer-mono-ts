@@ -47,14 +47,7 @@ const Login = () => {
     });
 
   return (
-    <Paper
-      elevation={2}
-      sx={{
-        height: '50%',
-        width: '60%',
-        p: 4,
-      }}
-    >
+    <Paper elevation={2} sx={{ width: '100%', p: 4 }}>
       <Center sx={{ flexDirection: 'column', gap: 2 }}>
         <Form onSubmit={handleSubmit}>
           <TextField
@@ -78,6 +71,7 @@ const Login = () => {
             error={touched.password && Boolean(errors.password)}
             helperText={touched.password && errors.password}
             fullWidth
+            type="password"
           />
           <Button variant="contained" loading={isLoading} type="submit">
             {t('components.auth.common.login')}

@@ -15,6 +15,7 @@ const Auth = () => {
         width: '100%',
         height: '100%',
         flexDirection: 'column',
+        overflow: 'hidden',
       }}
     >
       <Login />
