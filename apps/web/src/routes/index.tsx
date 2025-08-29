@@ -5,6 +5,7 @@ import Auth from './Auth';
 import PrivateRoute from '../components/common/PrivateRoute';
 import PublicRoute from '../components/common/PublicRoute';
 import Home from './Home';
+import Settings from './Settings';
 
 const publicRoutes: RouteObject[] = [
   {
@@ -29,6 +30,10 @@ const privateRoutes: RouteObject[] = [
       {
         path: '/',
         Component: Home,
+      },
+      {
+        path: '/settings',
+        Component: Settings,
       },
     ],
   },

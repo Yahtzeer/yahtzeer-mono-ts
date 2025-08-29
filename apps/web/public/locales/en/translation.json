@@ -37,6 +37,10 @@
       "register": {
         "haveAccount": "Log in to existing account"
       }
+    },
+    "sidebar": {
+      "logout": "Logout",
+      "settings": "Settings"
     }
   },
   "common": {

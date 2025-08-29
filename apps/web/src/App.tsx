@@ -11,7 +11,14 @@ const App = () => {
 
   return (
     <Suspense fallback={t('common.loading')}>
-      <Box sx={{ height: '100vh', width: '100vw', overflow: 'hidden' }}>
+      <Box
+        sx={{
+          height: '100vh',
+          width: '100vw',
+          overflow: 'hidden',
+          display: 'flex',
+        }}
+      >
         {isLoading ? <Center>{t('common.loading')}</Center> : <Outlet />}
       </Box>
     </Suspense>

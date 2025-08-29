@@ -8,9 +8,86 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  username  String   @unique @db.Citext
-  password  String
+  id           Int           @id @default(autoincrement())
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  username     String        @unique @db.Citext
+  password     String
+  turns        Turn[]
+  scoreColumns ScoreColumn[]
+}
+
+enum ScoreFieldType {
+  ONES
+  TWOS
+  THREES
+  FOURS
+  FIVES
+  SIXES
+  PAIR
+  TWO_PAIRS
+  THREE_OF_A_KIND
+  FOUR_OF_A_KIND
+  SMALL_STRAIGHT
+  LARGE_STRAIGHT
+  FULL_HOUSE
+  CHANCE
+  YAHTZEE
+}
+
+enum GameState {
+  CREATED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum GameMode {
+  CLASSIC
+}
+
+model Game {
+  id        Int           @id @default(autoincrement())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  slug      String        @unique
+  turns     Turn[]
+  status    GameState     @default(CREATED)
+  mode      GameMode      @default(CLASSIC)
+  players   ScoreColumn[]
+}
+
+model Turn {
+  id             Int         @id @default(autoincrement())
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  rolls          Int         @default(0)
+  gameId         Int
+  game           Game        @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  playerColumnId Int
+  player         ScoreColumn @relation(fields: [playerColumnId], references: [id], onDelete: Cascade)
+  dice           Json        @default("[]")
+  User           User?       @relation(fields: [userId], references: [id])
+  userId         Int?
+}
+
+model ScoreColumn {
+  id        Int          @id @default(autoincrement())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  playerId  Int
+  player    User         @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  gameId    Int
+  game      Game         @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  fields    ScoreField[]
+  Turn      Turn[]
+}
+
+model ScoreField {
+  id        Int            @id @default(autoincrement())
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  type      ScoreFieldType
+  score     Int?
+  columnId  Int
+  column    ScoreColumn    @relation(fields: [columnId], references: [id], onDelete: Cascade)
 }
