@@ -3,39 +3,45 @@
 # Database structure
 
 ```mermaid
-erDiagram
-    USER ||--o{ SCORECOLUMN : has
-    USER ||--o{ TURN : has
-    GAME ||--o{ TURN : has
-    GAME ||--o{ SCORECOLUMN : has
-    SCORECOLUMN ||--o{ SCOREFIELD : has
-    SCORECOLUMN ||--o{ TURN : has
-
-    USER {
-        int id PK
-        string username
+classDiagram
+    class User {
+        +int id
+        +string username
     }
 
-    GAME {
-        int id PK
-        string slug
+    class Game {
+        +int id
+        +string slug
+        +GameState status
+        +GameMode mode
     }
 
-    TURN {
-        int id PK
-        int gameId FK
-        int playerColumnId FK
-        int? userId FK
+    class Turn {
+        +int id
+        +int rolls
+        +json dice
+        +int gameId
+        +int playerColumnId
+        +int? userId
     }
 
-    SCORECOLUMN {
-        int id PK
-        int playerId FK
-        int gameId FK
+    class ScoreColumn {
+        +int id
+        +int playerId
+        +int gameId
     }
 
-    SCOREFIELD {
-        int id PK
-        int columnId FK
-        string type
+    class ScoreField {
+        +int id
+        +string type
+        +int? score
+        +int columnId
     }
+
+    %% Relationships
+    User "1" --> "*" ScoreColumn : has
+    User "1" --> "*" Turn : has
+    Game "1" --> "*" Turn : has
+    Game "1" --> "*" ScoreColumn : has
+    ScoreColumn "1" --> "*" ScoreField : has
+    ScoreColumn "1" --> "*" Turn : has
