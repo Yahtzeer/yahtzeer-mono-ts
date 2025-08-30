@@ -12,10 +12,19 @@ import apiService from '../../redux/serivces';
 import { ReduxTagTypes } from '../../redux/tagTypes';
 import { useAppDispatch } from '../../redux/hooks';
 
-const BottomContent = () => {
+type Props = {
+  onClose?: () => void;
+};
+
+const BottomContent = ({ onClose }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const handleClick = (path: string) => {
+    navigate(path);
+    onClose?.();
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -25,7 +34,7 @@ const BottomContent = () => {
 
   return (
     <List>
-      <ListItemButton onClick={() => navigate('/settings')}>
+      <ListItemButton onClick={() => handleClick('/settings')}>
         <ListItemIcon>
           <SettingsIcon />
         </ListItemIcon>

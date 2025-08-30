@@ -1,5 +1,7 @@
+import { Box } from '@mui/material';
+
 const Settings = () => {
-  return <p>Settings are here</p>;
+  return <Box>Settings</Box>;
 };
 
 export default Settings;

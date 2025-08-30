@@ -7,15 +7,13 @@ import {
   Typography,
 } from '@mui/material';
 import { useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { useLocation } from 'react-router';
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from '../Sidebar';
 
 const DRAWER_WIDTH = 150;
 
 const Toolbar = () => {
-  const navigate = useNavigate();
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -27,12 +25,10 @@ const Toolbar = () => {
     return path.charAt(0).toUpperCase() + path.slice(1);
   }, [pathname]);
 
-  const isHomePath = pageName === 'Home';
-
   return (
     <Box>
       <AppBar
-        position="fixed"
+        position="static"
         elevation={0}
         sx={{
           backgroundColor: (theme) => theme.palette.background.paper,
@@ -40,7 +36,7 @@ const Toolbar = () => {
           WebkitBackdropFilter: 'blur(10px)',
         }}
       >
-        <MuiToolbar sx={{ ml: { xs: 'none', sm: '150px' } }}>
+        <MuiToolbar sx={{ ml: { xs: 'none', sm: DRAWER_WIDTH } }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -50,11 +46,6 @@ const Toolbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          {!isHomePath ? (
-            <IconButton onClick={() => navigate('/')} sx={{ mr: 1 }}>
-              <ChevronLeftIcon />
-            </IconButton>
-          ) : null}
           <Typography sx={{ color: 'white' }}>{pageName}</Typography>
         </MuiToolbar>
       </AppBar>

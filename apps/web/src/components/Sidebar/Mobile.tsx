@@ -20,7 +20,7 @@ const MobileSidebar = ({ width, open, onClose }: Props) => {
         },
       }}
     >
-      <DrawerContent />
+      <DrawerContent onClose={onClose} />
     </Drawer>
   );
 };

@@ -16,9 +16,16 @@ const PrivateRoute = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', flex: 1 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column',
+        height: '100vh',
+      }}
+    >
       <Toolbar />
-      <Box component="main" sx={{ p: 3, flex: 1 }}>
+      <Box component="main" sx={{ p: 3, flex: 1, overflow: 'hidden' }}>
         <Outlet />
       </Box>
     </Box>
