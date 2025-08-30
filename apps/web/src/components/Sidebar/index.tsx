@@ -1,17 +1,28 @@
-import { Box, Divider, Drawer, List } from '@mui/material';
-import BottomContent from './BottomContent';
+import { Drawer } from '@mui/material';
+import DrawerContent from './DrawerContent';
+import MobileSidebar from './Mobile';
 
-const DRAWER_WIDTH = 150;
+type Props = {
+  width: number;
+  mobileDrawerOpen: boolean;
+  closeMobileDrawer: () => void;
+};
 
-const Sidebar = () => {
+const Sidebar = ({ width, mobileDrawerOpen, closeMobileDrawer }: Props) => {
   return (
-    <Drawer variant="permanent" sx={{ width: DRAWER_WIDTH }}>
-      <List sx={{ height: '100%' }}>
-        <Box />
-      </List>
-      <Divider />
-      <BottomContent />
-    </Drawer>
+    <>
+      <MobileSidebar
+        width={width}
+        open={mobileDrawerOpen}
+        onClose={closeMobileDrawer}
+      />
+      <Drawer
+        variant="permanent"
+        sx={{ width: width, display: { xs: 'none', sm: 'block' } }}
+      >
+        <DrawerContent />
+      </Drawer>
+    </>
   );
 };
 

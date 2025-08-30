@@ -1,7 +1,6 @@
 import { useCurrentUserQuery } from '../../redux/serivces/authService';
 import { Navigate, Outlet } from 'react-router';
 import Loading from './Loading';
-import Sidebar from '../Sidebar';
 import { Box } from '@mui/material';
 import Toolbar from '../Toolbar';
 
@@ -18,7 +17,6 @@ const PrivateRoute = () => {
 
   return (
     <Box sx={{ display: 'flex', flex: 1 }}>
-      <Sidebar />
       <Toolbar />
       <Box component="main" sx={{ p: 3, flex: 1 }}>
         <Outlet />
