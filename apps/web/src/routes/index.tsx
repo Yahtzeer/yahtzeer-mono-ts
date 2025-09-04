@@ -6,6 +6,7 @@ import PrivateRoute from '../components/common/PrivateRoute';
 import PublicRoute from '../components/common/PublicRoute';
 import Home from './Home';
 import Settings from './Settings';
+import Game from './Game';
 
 const publicRoutes: RouteObject[] = [
   {
@@ -28,12 +29,16 @@ const privateRoutes: RouteObject[] = [
     Component: PrivateRoute,
     children: [
       {
-        path: '/',
+        path: '',
         Component: Home,
       },
       {
-        path: '/settings',
+        path: 'settings',
         Component: Settings,
+      },
+      {
+        path: 'game/:slug',
+        Component: Game,
       },
     ],
   },

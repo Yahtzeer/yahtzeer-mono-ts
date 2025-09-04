@@ -13,7 +13,10 @@ const MobileSidebar = ({ width, open, onClose }: Props) => {
       open={open}
       onClose={onClose}
       variant="temporary"
-      sx={{ display: { xs: 'block', sm: 'none' }, width }}
+      sx={{
+        display: { xs: 'block', sm: 'none' },
+        '& .MuiDrawer-paper': { boxSizing: 'border-box', width },
+      }}
       slotProps={{
         root: {
           keepMounted: true,

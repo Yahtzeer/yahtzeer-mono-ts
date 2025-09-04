@@ -1,4 +1,4 @@
-import { Drawer } from '@mui/material';
+import { Box, Drawer } from '@mui/material';
 import DrawerContent from './DrawerContent';
 import MobileSidebar from './Mobile';
 
@@ -10,7 +10,7 @@ type Props = {
 
 const Sidebar = ({ width, mobileDrawerOpen, closeMobileDrawer }: Props) => {
   return (
-    <>
+    <Box component="nav" sx={{ width: { sm: width }, flexShrink: { sm: 0 } }}>
       <MobileSidebar
         width={width}
         open={mobileDrawerOpen}
@@ -18,11 +18,14 @@ const Sidebar = ({ width, mobileDrawerOpen, closeMobileDrawer }: Props) => {
       />
       <Drawer
         variant="permanent"
-        sx={{ width: width, display: { xs: 'none', sm: 'block' } }}
+        sx={{
+          display: { xs: 'none', sm: 'block' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width },
+        }}
       >
         <DrawerContent />
       </Drawer>
-    </>
+    </Box>
   );
 };
 

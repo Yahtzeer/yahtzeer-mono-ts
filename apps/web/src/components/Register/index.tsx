@@ -1,46 +1,48 @@
-import { Button, Divider, Paper, TextField } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { Paper, TextField, Divider, Button } from '@mui/material';
+import AuthForm from '../common/AuthForm';
+import Center from '../common/Center';
+import { useTranslation } from 'react-i18next';
 import {
   useLoginMutation,
-  type AuthInput,
+  useRegisterMutation,
 } from '../../redux/serivces/authService';
-import { useNavigate } from 'react-router';
-import Center from '../common/Center';
-import AuthForm from '../common/AuthForm';
 
-const initialValues: AuthInput = {
+const initialValues = {
   username: '',
   password: '',
+  confirmPassword: '',
 };
 
 const validationSchema = yup.object({
-  username: yup.string().required('Username is required'),
-  password: yup.string().required('Password is required'),
+  username: yup.string().required(),
+  password: yup.string().required(),
+  confirmPassword: yup
+    .string()
+    .required()
+    .oneOf([yup.ref('password')]),
 });
 
 type Props = {
   changeForm: () => void;
 };
 
-const Login = ({ changeForm }: Props) => {
+const Register = ({ changeForm }: Props) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [login, { isLoading }] = useLoginMutation();
-
-  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+  const [register, { isLoading: registering }] = useRegisterMutation();
+  const [login, { isLoading: signingIn }] = useLoginMutation();
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues,
       validationSchema,
       onSubmit: async (vals) => {
-        const { data } = await login(vals);
-
-        if (data) {
-          navigate('/', { replace: true });
-        }
+        await register(vals);
+        await login(vals);
       },
     });
+
+  const isLoading = registering || signingIn;
 
   return (
     <Paper elevation={2} sx={{ width: '100%', p: 4 }}>
@@ -69,17 +71,29 @@ const Login = ({ changeForm }: Props) => {
             fullWidth
             type="password"
           />
+          <TextField
+            name="confirmPassword"
+            label={t('components.auth.common.confirmPassword')}
+            margin="normal"
+            value={values.confirmPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+            helperText={touched.confirmPassword && errors.confirmPassword}
+            fullWidth
+            type="password"
+          />
           <Button variant="contained" loading={isLoading} type="submit">
-            {t('components.auth.common.login')}
+            {t('components.auth.common.register')}
           </Button>
         </AuthForm>
         <Divider>{t('common.or')}</Divider>
         <Button onClick={changeForm}>
-          {t('components.auth.login.noAccount')}
+          {t('components.auth.register.haveAccount')}
         </Button>
       </Center>
     </Paper>
   );
 };
 
-export default Login;
+export default Register;

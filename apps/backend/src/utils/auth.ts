@@ -1,8 +1,9 @@
-import { Prisma, User } from '@prisma/client';
+import { User } from '@prisma/client';
 import { Request } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { JWT_SECRET } from './config';
+import { TokenPayload } from '../types/Request';
 
 export const getToken = (req: Request) => {
   const authHeader = req.headers.authorization;
@@ -15,7 +16,7 @@ export const getToken = (req: Request) => {
 };
 
 export const getUserFromToken = (token: string) => {
-  return jwt.verify(token, JWT_SECRET);
+  return jwt.verify(token, JWT_SECRET) as TokenPayload;
 };
 
 export const createInputUser = async (username: string, password: string) => ({

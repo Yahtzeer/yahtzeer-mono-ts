@@ -28,6 +28,7 @@
       "common": {
         "username": "Username",
         "password": "Password",
+        "confirmPassword": "Confirm password",
         "login": "Login",
         "register": "Register"
       },

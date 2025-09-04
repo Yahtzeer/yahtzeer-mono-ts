@@ -28,15 +28,17 @@ const Toolbar = () => {
   return (
     <Box>
       <AppBar
-        position="static"
+        position="fixed"
         elevation={0}
         sx={{
           backgroundColor: (theme) => theme.palette.background.paper,
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
+          width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
+          ml: { sm: `${DRAWER_WIDTH}px` },
         }}
       >
-        <MuiToolbar sx={{ ml: { xs: 'none', sm: DRAWER_WIDTH } }}>
+        <MuiToolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"

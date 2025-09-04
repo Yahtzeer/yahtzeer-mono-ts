@@ -20,12 +20,17 @@ const PrivateRoute = () => {
       sx={{
         display: 'flex',
         flex: 1,
-        flexDirection: 'column',
-        height: '100vh',
       }}
     >
       <Toolbar />
-      <Box component="main" sx={{ p: 3, flex: 1, overflow: 'hidden' }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - 150px)` },
+        }}
+      >
         <Outlet />
       </Box>
     </Box>

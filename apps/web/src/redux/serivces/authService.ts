@@ -20,7 +20,7 @@ const authService = apiService.injectEndpoints({
       query: () => '/auth/me',
       providesTags: [ReduxTagTypes.User],
     }),
-    regster: build.mutation<void, AuthInput>({
+    register: build.mutation<void, AuthInput>({
       query: (body) => ({
         url: '/auth/register',
         method: 'POST',
@@ -42,5 +42,5 @@ const authService = apiService.injectEndpoints({
   }),
 });
 
-export const { useCurrentUserQuery, useLoginMutation, useRegsterMutation } =
+export const { useCurrentUserQuery, useLoginMutation, useRegisterMutation } =
   authService;

@@ -1,9 +1,15 @@
 import { Button, Container } from '@mui/material';
 import Login from '../components/Login';
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import Register from '../components/Register';
 
 const Auth = () => {
   const navigate = useNavigate();
+  const [visibleForm, setVisibleForm] = useState<'login' | 'register'>('login');
+
+  const changeForm = () =>
+    setVisibleForm((prev) => (prev === 'login' ? 'register' : 'login'));
 
   return (
     <Container
@@ -18,7 +24,11 @@ const Auth = () => {
         overflow: 'hidden',
       }}
     >
-      <Login />
+      {visibleForm === 'login' ? (
+        <Login changeForm={changeForm} />
+      ) : (
+        <Register changeForm={changeForm} />
+      )}
       <Button onClick={() => navigate('/scorecard')}>
         I just need a scorecard
       </Button>

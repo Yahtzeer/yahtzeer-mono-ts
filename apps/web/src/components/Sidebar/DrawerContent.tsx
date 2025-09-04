@@ -5,6 +5,7 @@ import {
   ListItemAvatar,
   ListItemButton,
   ListItemText,
+  Toolbar,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import BottomContent from './BottomContent';
@@ -23,6 +24,8 @@ const DrawerContent = ({ onClose }: Props) => {
 
   return (
     <>
+      <Toolbar />
+      <Divider />
       <List sx={{ height: '100%' }}>
         <ListItemButton onClick={() => handleClick('/')}>
           <ListItemAvatar>
