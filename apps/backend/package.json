@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "@yahtzeer/backend",
   "version": "1.0.0",
   "description": "A Nodejs backend for Yahtzeer",
   "license": "GPL-3.0",
@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "prisma generate --no-engine",
     "dev": "ts-node-dev index.ts",
-    "build": "turbo run build --filter=@repo/backend...",
+    "build": "turbo run build --filter=@yahtzeer/backend...",
     "start": "node dist/index.js"
   },
   "devDependencies": {

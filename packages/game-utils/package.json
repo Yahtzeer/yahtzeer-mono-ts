@@ -1,5 +1,5 @@
 {
-  "name": "@repo/game-utils",
+  "name": "@yahtzeer/game-utils",
   "type": "module",
   "scripts": {
     "dev": "tsc --watch",
