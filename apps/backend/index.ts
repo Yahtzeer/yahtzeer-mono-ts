@@ -3,7 +3,7 @@ import { Server } from 'socket.io';
 import app from './src/app';
 import { PORT } from './src/utils/config';
 import logger from './src/utils/logger';
-import initializeSocket from './src/utils/socket';
+import initializeSocket from './src/api/v1/sockets';
 import {
   ClientToServerEvents,
   InterServerEvents,

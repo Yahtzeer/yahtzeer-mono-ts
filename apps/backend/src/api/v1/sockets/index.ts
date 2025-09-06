@@ -4,9 +4,9 @@ import {
   InterServerEvents,
   ServerToClientEvents,
   SocketData,
-} from '../types/Sockets';
-import { getUserFromToken } from './auth';
-import { createGame } from '../api/v1/serivces/game';
+} from '../../../types/Sockets';
+import { getUserFromToken } from '../../../utils/auth';
+import { createGame, getGame, joinGame } from '../serivces/game';
 
 const initializeSocket = (
   io: Server<
@@ -47,6 +47,25 @@ const initializeSocket = (
 
     socket.on('joinGame', async (slug) => {
       try {
+        const game = await getGame(slug);
+
+        if (game) {
+          const isInGame = game.players.find((p) => p.playerId === user.id);
+
+          if (isInGame) {
+            return socket.emit('joinedGame', game);
+          }
+
+          if (game.status !== 'CREATED') {
+            return socket.emit('error', 'Game already running or completed');
+          }
+
+          const updated = await joinGame(slug, user.id);
+
+          socket.emit('joinedGame', updated);
+        } else {
+          socket.emit('error', `No game found with slug ${slug}`);
+        }
       } catch (error) {
         socket.emit('error', 'Failed to join a game');
       }

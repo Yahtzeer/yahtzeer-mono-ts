@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "prisma generate --no-engine",
     "dev": "ts-node-dev index.ts",
-    "build": "tsc -p tsconfig.json",
+    "build": "turbo run build --filter=@repo/backend...",
     "start": "node dist/index.js"
   },
   "devDependencies": {

@@ -2,6 +2,7 @@ import { Game, User } from '@prisma/client';
 
 export type ServerToClientEvents = {
   gameCreated: (game: Game) => void;
+  joinedGame: (game: Game) => void;
   error: (message: string) => void;
 };
 
