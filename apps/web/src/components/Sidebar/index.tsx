@@ -10,7 +10,7 @@ type Props = {
 
 const Sidebar = ({ width, mobileDrawerOpen, closeMobileDrawer }: Props) => {
   return (
-    <Box component="nav" sx={{ width: { sm: width }, flexShrink: { sm: 0 } }}>
+    <Box component="nav" sx={{ width: { md: width }, flexShrink: { sm: 0 } }}>
       <MobileSidebar
         width={width}
         open={mobileDrawerOpen}
@@ -19,7 +19,7 @@ const Sidebar = ({ width, mobileDrawerOpen, closeMobileDrawer }: Props) => {
       <Drawer
         variant="permanent"
         sx={{
-          display: { xs: 'none', sm: 'block' },
+          display: { xs: 'none', md: 'block' },
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width },
         }}
       >

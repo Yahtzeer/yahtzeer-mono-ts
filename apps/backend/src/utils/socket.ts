@@ -44,6 +44,13 @@ const initializeSocket = (
         socket.emit('error', 'Failed to create game');
       }
     });
+
+    socket.on('joinGame', async (slug) => {
+      try {
+      } catch (error) {
+        socket.emit('error', 'Failed to join a game');
+      }
+    });
   });
 };
 

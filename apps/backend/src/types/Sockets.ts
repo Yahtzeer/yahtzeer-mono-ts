@@ -7,6 +7,7 @@ export type ServerToClientEvents = {
 
 export type ClientToServerEvents = {
   createGame: () => void;
+  joinGame: (slug: string) => void;
 };
 
 export type InterServerEvents = {};

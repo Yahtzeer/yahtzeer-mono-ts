@@ -1,4 +1,4 @@
-import { API_URL } from '@web/utils/config';
+import { API_URL } from '../utils/config';
 import { useEffect, useRef } from 'react';
 import { io, Socket } from 'socket.io-client';
 

@@ -1,7 +1,7 @@
 import { useCurrentUserQuery } from '../../redux/serivces/authService';
 import { Navigate, Outlet } from 'react-router';
 import Loading from './Loading';
-import { Box } from '@mui/material';
+import { Box, Toolbar as MuiToolbar } from '@mui/material';
 import Toolbar from '../Toolbar';
 
 const PrivateRoute = () => {
@@ -28,9 +28,12 @@ const PrivateRoute = () => {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - 150px)` },
+          width: { md: `calc(100% - 150px)` },
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
+        <MuiToolbar />
         <Outlet />
       </Box>
     </Box>
